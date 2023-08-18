@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 
+const socketServer = require('./socketServer')
 const authRoutes = require('./routes/authRoutes')
 
 const PORT = process.env.PORT || process.env.API_PORT;
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || process.env.API_PORT;
  app.use("/api/auth/", authRoutes)
 
  const server = http.createServer(app);
+ socketServer.registerSocketServer(server);
 
 
  mongoose.connect(process.env.MONGO_URI).then(()=>{

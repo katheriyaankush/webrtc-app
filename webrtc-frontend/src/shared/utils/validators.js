@@ -17,7 +17,7 @@ function passwordValidator(password){
 function usernameValidator(username){
     return username.length > 3 && username.length < 12
 }
-function mailValidator(mail){
+export const mailValidator = (mail) => {
     const expresion = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return expresion.test(mail)
 

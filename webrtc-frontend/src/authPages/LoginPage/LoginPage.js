@@ -18,8 +18,8 @@ const LoginPage = ({ login }) => {
   useEffect(()=>{
     setIsFormValid(validateLoginForm(mail, password));
   },[mail, password, setIsFormValid]);
+  
   const handleLogin = () => {
-
     const userDetails ={
       mail,
       password

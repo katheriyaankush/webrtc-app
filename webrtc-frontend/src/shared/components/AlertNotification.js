@@ -1,26 +1,32 @@
-import React from 'react'
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
-import { connect } from 'react-redux';
+import React from "react";
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
+import { connect } from "react-redux";
+import { getActions } from "../../store/actions/alertActions";
 
 export function AlertNotification(props) {
-    console.log("Props====", props)
+  console.log("Props====", props);
   return (
-    <Snackbar 
-    open 
-    anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
-    closeOnClick={()=>{}}
-    //autoHideDuration={6000} 
+    <Snackbar
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      open={props.showAlertMessage}
+      onClose={props.closeAlertMessage}
+      autoHideDuration={6000}
     >
-    <Alert severity="error">This is an error alert — check it out!</Alert>
+      <Alert severity="error">{props.alertMessageContent}</Alert>
     </Snackbar>
-  )
+  );
 }
-const mapStateToProps = (error, errorMessage) => {
-    return {
-      error: error,
-      errorMessage: errorMessage
-    };
+const mapStoreStateToProps = ({ alert }) => {
+  return {
+    ...alert,
   };
+};
 
-export default connect(mapStateToProps)(AlertNotification);
+const mapActionsToProps = ( dispatch ) => {
+  return {
+    ...getActions(dispatch),
+  };
+};
+
+export default connect(mapStoreStateToProps, mapActionsToProps)(AlertNotification);
